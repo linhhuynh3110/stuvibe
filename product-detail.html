@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail - Stuvibe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    :root {
+      --green-950: #08351f;
+      --green-900: #0f5132;
+      --green-700: #1f7a46;
+      --green-500: #2ca86b;
+      --green-100: #e9f8ef;
+      --yellow-500: #f5c544;
+      --yellow-400: #ffe38a;
+      --yellow-200: #fff4c7;
+      --gray-900: #17212b;
+      --gray-600: #666;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Nunito", Arial, sans-serif; background: #f6faf7; color: var(--gray-900); line-height: 1.6; }
+    .container { width: min(1100px, 94%); margin: 0 auto; }
+
+    main { padding: 1.5rem 0 3rem; }
+
+    .breadcrumb {
+      padding: 0.5rem 0 1.2rem; font-size: 0.88rem; font-weight: 700; color: var(--gray-600);
+    }
+    .breadcrumb a { color: var(--green-700); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 0.3rem; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+    }
+
+    .product-photo {
+      width: 100%;
+      height: min(440px, 50vw);
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+    }
+
+    .product-info h1 {
+      font-size: 1.8rem; font-weight: 900; color: var(--green-950); margin-bottom: 0.3rem;
+    }
+    .product-info .price {
+      font-size: 1.8rem; font-weight: 900; color: var(--green-700); margin-bottom: 1rem;
+    }
+    .meta-line { margin-bottom: 0.4rem; font-weight: 700; font-size: 0.95rem; }
+    .meta-line strong { color: var(--gray-900); margin-right: 0.35rem; }
+    .meta-line span { color: var(--gray-600); }
+    .meta-line i { color: var(--gray-600); margin-right: 0.3rem; }
+
+    .seller-card {
+      background: #fff; border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .seller-card .seller-row {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;
+    }
+    .seller-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--green-100); display: flex; align-items: center;
+      justify-content: center; font-size: 1.3rem; color: var(--green-900); flex-shrink: 0;
+    }
+    .seller-info .name { font-weight: 900; font-size: 1.05rem; }
+    .seller-info .stars { color: var(--yellow-500); font-size: 0.9rem; }
+    .seller-info .stars .empty { color: #d1d5db; }
+    .btn-group { display: flex; gap: 0.75rem; }
+
+    .section-card {
+      background: #fff; border-radius: 16px; padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
+    }
+    .section-card h2 {
+      font-size: 0.95rem; font-weight: 900; text-transform: uppercase;
+      letter-spacing: 0.03em; color: var(--gray-600); margin-bottom: 0.75rem;
+    }
+    .section-card p { font-weight: 600; color: var(--gray-900); }
+
+    .review-item {
+      padding: 0.75rem 0; border-bottom: 1px solid #eee; font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .review-item:last-child { border-bottom: none; }
+    .r-stars { color: var(--yellow-500); font-size: 0.85rem; flex-shrink: 0; }
+
+    .recommended h2 {
+      font-size: 2.2rem; font-weight: 900; margin-bottom: 2rem; color: var(--green-900);
+    }
+    .recommended .products-grid { margin-bottom: 2rem; }
+    .seller-card .btn-group .btn { flex: 1; }
+
+    @media (max-width: 860px) {
+      .detail-grid { grid-template-columns: 1fr; }
+      .product-photo { height: min(320px, 50vw); }
+    }
+    @media (max-width: 560px) {
+      .btn-group { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+    <header class="topbar">
+    <div class="container nav">
+      <a href="homepage.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-links" class="nav-links">
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="saved.html" class="nav-saved"><i class="fa-solid fa-heart" aria-hidden="true"></i><span class="nav-saved-text">Saved</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="homepage.html">Home</a>
+      <span>&gt;</span>
+      <a id="breadcrumb-category" href="listings.html">Furniture</a>
+      <span>&gt;</span>
+      <span id="breadcrumb-item">indoor</span>
+    </nav>
+
+    <div class="detail-grid">
+      <img id="product-photo" class="product-photo" src="furniture.jpeg" alt="Product photo">
+
+      <div class="product-info">
+        <h1 id="item-name">Desk Chair</h1>
+        <p class="price" id="item-price">$50</p>
+        <p class="meta-line"><strong>Condition:</strong> <span id="item-condition">Good</span></p>
+        <p class="meta-line"><i class="fa-solid fa-location-dot"></i> <span id="item-location">Near Flinder Station</span></p>
+        <p class="meta-line"><i class="fa-regular fa-clock"></i> Posted: <span id="item-posted">2 days ago</span></p>
+
+        <div class="seller-card">
+          <div class="seller-row">
+            <div class="seller-avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></div>
+            <div class="seller-info">
+              <div class="name" id="seller-name">Richard</div>
+              <div class="stars" id="seller-stars" aria-label="Seller rating 3 out of 5">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star empty"></i>
+                <i class="fa-regular fa-star empty"></i>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline" id="chat-btn"><i class="fa-regular fa-message"></i> <span id="chat-btn-label">Chat with seller</span></button>
+            <button type="button" class="btn btn-primary" id="make-offer-btn"><i class="fa-regular fa-handshake"></i> Make an offer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Description</h2>
+      <p id="item-description">Comfortable study chair in good condition. Ideal for dorm or shared housing. Pick up near campus.</p>
+    </div>
+
+    <div class="section-card">
+      <h2 id="reviews-heading">Review for Richard</h2>
+      <div class="review-item">
+        <span>“Quick response and item matched the description.” — Alex</span>
+        <span class="r-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
+      </div>
+      <div class="review-item">
+        <span>“Easy campus meet-up, would buy again.” — Sam</span>
+        <span class="r-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
+      </div>
+    </div>
+
+    <section class="recommended">
+      <h2>Recommended</h2>
+      <div class="products-grid" id="recommended-grid"></div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="homepage.html" class="footer-logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+          <p>Making student living smarter, greener and more enjoyable with chill vibes</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="safety-tips.html">Safety Tips</a></li>
+            <li><a href="community-rules.html">Community Rules</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; <span id="copyright-year">2026</span> Stuvibe. Smart vibes, smarter savings for students.
+    </div>
+  </footer>
+
+  <div class="offer-modal" id="connect-modal" role="dialog" aria-labelledby="connect-title" aria-modal="true">
+    <div class="offer-dialog">
+      <h3 id="connect-title">Connect with seller</h3>
+      <p style="margin-bottom: 0.75rem; font-weight: 600;">Chat with <strong id="connect-seller-name">the seller</strong> about <strong id="connect-item-name">this item</strong></p>
+      <label for="connect-message" class="sr-only">Your message</label>
+      <textarea id="connect-message" rows="3" placeholder="Hi, I am interested in this item..."></textarea>
+      <div class="offer-actions">
+        <button type="button" id="connect-cancel" class="btn btn-outline">Cancel</button>
+        <button type="button" class="btn btn-primary" id="connect-submit">Send message</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="offer-modal" id="offer-modal" role="dialog" aria-labelledby="offer-title" aria-modal="true">
+    <div class="offer-dialog">
+      <h3 id="offer-title">Make an offer</h3>
+      <p style="margin-bottom: 0.75rem; font-weight: 600;">Propose a price for <strong id="offer-item-name">this item</strong> (listed at <strong id="offer-list-price">$0</strong>)</p>
+      <label for="offer-amount" class="sr-only">Your offer amount</label>
+      <input type="number" id="offer-amount" min="1" step="1" placeholder="Your offer ($)" inputmode="decimal">
+      <label for="offer-note" class="sr-only">Optional note</label>
+      <textarea id="offer-note" rows="2" placeholder="Optional: pickup time, questions..."></textarea>
+      <div class="offer-actions">
+        <button type="button" id="offer-cancel" class="btn btn-outline">Cancel</button>
+        <button type="button" class="btn btn-primary" id="offer-submit">Submit offer</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>
+(function (global) {
+  var CUSTOM_KEY = "stuvibe-custom-listings";
+
+  var CATALOG = {
+    "Artificial Intelligence": {
+      category: "Textbooks",
+      breadcrumb: "textbooks",
+      price: 50,
+      priceDisplay: "$50",
+      image: "textbook.jpeg",
+      condition: "Like new",
+      location: "CQU Melbourne",
+      seller: "Richard",
+      rating: 3,
+      description: "Artificial Intelligence textbook used for one semester. No missing pages, minimal highlighting."
+    },
+    "HP 2024": {
+      category: "Electronics",
+      breadcrumb: "laptops",
+      price: 300,
+      priceDisplay: "$300",
+      image: "electronichp.png",
+      condition: "Excellent",
+      location: "RMIT Swanston",
+      seller: "Richard",
+      rating: 3,
+      description: "HP laptop 2024 model. Battery health good, includes charger. Perfect for study and assignments."
+    },
+    "Desk Chair": {
+      category: "Furniture",
+      breadcrumb: "indoor",
+      price: 30,
+      priceDisplay: "$30",
+      image: "furniture.jpeg",
+      condition: "Good",
+      location: "Near Flinders Station",
+      seller: "Richard",
+      rating: 3,
+      description: "Comfortable desk chair in good condition. Ideal for dorm or shared housing. Pick up near campus."
+    },
+    "Winter Jacket": {
+      category: "Clothing",
+      breadcrumb: "outerwear",
+      price: 70,
+      priceDisplay: "$70",
+      image: "clothing.png",
+      condition: "Very good",
+      location: "ACU Sydney",
+      seller: "Richard",
+      rating: 3,
+      description: "Warm winter jacket, size M. Worn a few times, clean and ready for the next owner."
+    },
+    "Bike": {
+      category: "Transport",
+      breadcrumb: "bike",
+      price: 120,
+      priceDisplay: "$120",
+      image: "transport.webp",
+      condition: "Good",
+      location: "Melbourne Uni",
+      seller: "Richard",
+      rating: 3,
+      description: "Student bike in good condition. Perfect for getting around campus and nearby areas. Helmet included."
+    }
+  };
+
+  function getCustomListings() {
+    try {
+      return JSON.parse(localStorage.getItem(CUSTOM_KEY) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCustomListings(list) {
+    localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
+  }
+
+  function normalizeProduct(name, data) {
+    var product = Object.assign({}, data);
+    product.name = name;
+    if (typeof product.price === "number" && !product.priceDisplay) {
+      product.priceDisplay = "$" + product.price;
+    }
+    if (!product.price && product.priceDisplay) {
+      product.price = parsePrice(product);
+    }
+    return product;
+  }
+
+  function getAllProducts() {
+    var merged = {};
+    Object.keys(CATALOG).forEach(function (name) {
+      merged[name] = normalizeProduct(name, CATALOG[name]);
+    });
+    getCustomListings().forEach(function (item) {
+      if (item && item.name) {
+        merged[item.name] = normalizeProduct(item.name, item);
+      }
+    });
+    return merged;
+  }
+
+  function getProduct(name) {
+    return getAllProducts()[name] || null;
+  }
+
+  function getProductNames() {
+    return Object.keys(getAllProducts());
+  }
+
+  function parsePrice(product) {
+    if (typeof product.price === "number") {
+      return product.price;
+    }
+    return parseFloat(String(product.priceDisplay || product.price || "0").replace(/[^0-9.]/g, "")) || 0;
+  }
+
+  function addProduct(product) {
+    var custom = getCustomListings();
+    var entry = normalizeProduct(product.name, product);
+    custom = custom.filter(function (item) {
+      return item.name !== entry.name;
+    });
+    custom.unshift(entry);
+    saveCustomListings(custom);
+    return entry;
+  }
+
+  global.StuvibeProducts = {
+    CATALOG: CATALOG,
+    getAllProducts: getAllProducts,
+    getProduct: getProduct,
+    getProductNames: getProductNames,
+    parsePrice: parsePrice,
+    addProduct: addProduct,
+    getCustomListings: getCustomListings
+  };
+})(window);
+
+(function (global) {
+  var FAV_KEY = "stuvibe-favourites";
+
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function getFavourites() {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
+    } catch (e) {
+      return new Set();
+    }
+  }
+
+  function saveFavourites(set) {
+    localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(set)));
+  }
+
+  function renderProductCard(name, product, options) {
+    options = options || {};
+    var tagClass = options.tagClass || "tag";
+    var price = product.priceDisplay || ("$" + product.price);
+    var detailUrl = "product-detail.html?item=" + encodeURIComponent(name);
+    var alt = escapeHtml(product.alt || name);
+
+    return (
+      '<article class="product-card" data-category="' + escapeHtml(product.category) + '" data-name="' + escapeHtml(name) + '" data-price="' + global.StuvibeProducts.parsePrice(product) + '">' +
+        '<div class="img-wrap">' +
+          '<span class="' + tagClass + '">' + escapeHtml(product.category) + "</span>" +
+          '<button class="heart" type="button" aria-label="Add ' + escapeHtml(name) + ' to favourites"><i class="fa-solid fa-heart"></i></button>' +
+          '<img src="' + escapeHtml(product.image) + '" alt="' + alt + '" loading="lazy">' +
+        "</div>" +
+        '<div class="p-info">' +
+          "<h3>" + escapeHtml(name) + "</h3>" +
+          '<div class="p-loc"><i class="fa-solid fa-location-dot"></i> ' + escapeHtml(product.location) + "</div>" +
+          '<div class="p-foot">' +
+            '<span class="p-price">' + escapeHtml(price) + "</span>" +
+            '<a href="' + detailUrl + '" class="p-detail">View detail</a>' +
+          "</div>" +
+        "</div>" +
+      "</article>"
+    );
+  }
+
+  function applyFavouriteState(root) {
+    var favourites = getFavourites();
+    (root || document).querySelectorAll(".product-card").forEach(function (card) {
+      var button = card.querySelector(".heart");
+      if (!button) {
+        return;
+      }
+      var productName = card.getAttribute("data-name") || "";
+      var isFavourite = favourites.has(productName);
+      button.classList.toggle("is-favorite", isFavourite);
+      button.setAttribute(
+        "aria-label",
+        (isFavourite ? "Remove " : "Add ") + productName + (isFavourite ? " from favourites" : " to favourites")
+      );
+    });
+  }
+
+  function initFavourites(root) {
+    var container = root || document;
+    container.addEventListener("click", function (event) {
+      var button = event.target.closest(".heart");
+      if (!button) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      var card = button.closest(".product-card");
+      if (!card) {
+        return;
+      }
+      var productName = card.getAttribute("data-name") || "";
+      var favourites = getFavourites();
+      if (favourites.has(productName)) {
+        favourites.delete(productName);
+      } else {
+        favourites.add(productName);
+      }
+      saveFavourites(favourites);
+      applyFavouriteState(container);
+    });
+    applyFavouriteState(container);
+  }
+
+  function renderProductGrid(gridEl, names, options) {
+    if (!gridEl) {
+      return [];
+    }
+    var products = global.StuvibeProducts.getAllProducts();
+    var html = names
+      .map(function (name) {
+        return products[name] ? renderProductCard(name, products[name], options) : "";
+      })
+      .join("");
+    gridEl.innerHTML = html;
+    applyFavouriteState(gridEl);
+    return Array.from(gridEl.querySelectorAll(".product-card"));
+  }
+
+  global.StuvibeProductUI = {
+    escapeHtml: escapeHtml,
+    renderProductCard: renderProductCard,
+    renderProductGrid: renderProductGrid,
+    initFavourites: initFavourites,
+    applyFavouriteState: applyFavouriteState,
+    getFavourites: getFavourites
+  };
+})(window);
+
+(function (global) {
+  function getFocusable(container) {
+    return Array.from(
+      container.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter(function (el) {
+      return el.offsetParent !== null;
+    });
+  }
+
+  function setupModal(modalEl) {
+    if (!modalEl) {
+      return { open: function () {}, close: function () {} };
+    }
+
+    var dialog = modalEl.querySelector(".offer-dialog");
+    var lastFocus = null;
+
+    function open() {
+      lastFocus = document.activeElement;
+      modalEl.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      var focusable = getFocusable(dialog || modalEl);
+      if (focusable.length) {
+        focusable[0].focus();
+      }
+    }
+
+    function close() {
+      modalEl.classList.remove("is-open");
+      document.body.style.overflow = "";
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    }
+
+    modalEl.addEventListener("click", function (event) {
+      if (event.target === modalEl) {
+        close();
+      }
+    });
+
+    modalEl.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab" || !modalEl.classList.contains("is-open")) {
+        return;
+      }
+      var focusable = getFocusable(dialog || modalEl);
+      if (!focusable.length) {
+        return;
+      }
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    return { open: open, close: close };
+  }
+
+  global.StuvibeModals = { setupModal: setupModal };
+})(window);
+
+(function (global) {
+  function listingsUrl(query, category) {
+    var params = new URLSearchParams();
+    if (query) {
+      params.set("q", query);
+    }
+    if (category && category !== "all" && category !== "All Categories") {
+      params.set("category", category);
+    }
+    var qs = params.toString();
+    return "listings.html" + (qs ? "?" + qs : "");
+  }
+
+  function initNavSearch() {
+    var nav = document.querySelector(".topbar .nav");
+    if (!nav || nav.querySelector(".nav-search")) {
+      return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var currentQ = params.get("q") || "";
+
+    var form = document.createElement("form");
+    form.className = "nav-search";
+    form.setAttribute("role", "search");
+    form.setAttribute("aria-label", "Search listings");
+    form.action = "listings.html";
+    form.method = "get";
+    form.innerHTML =
+      '<label for="nav-search-input" class="sr-only">Search items</label>' +
+      '<input id="nav-search-input" type="search" name="q" placeholder="Search items..." value="' + currentQ.replace(/"/g, "&quot;") + '">' +
+      '<button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>';
+
+    var toggle = document.getElementById("nav-toggle");
+    if (toggle) {
+      nav.insertBefore(form, toggle);
+    } else {
+      nav.appendChild(form);
+    }
+  }
+
+  function initHeroSearch(formSelector) {
+    var searchInput = document.getElementById("search-input");
+    var searchCategory = document.getElementById("search-category");
+    var searchButton = document.getElementById("search-btn");
+    if (!searchInput || !searchCategory) {
+      return;
+    }
+
+    function goToListings() {
+      window.location.href = listingsUrl(searchInput.value.trim(), searchCategory.value);
+    }
+
+    if (searchButton) {
+      searchButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        goToListings();
+      });
+    }
+
+    var wrapper = document.querySelector(formSelector || ".search-wrapper");
+    if (wrapper) {
+      wrapper.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          goToListings();
+        }
+      });
+    }
+  }
+
+  global.StuvibeSearch = {
+    listingsUrl: listingsUrl,
+    initNavSearch: initNavSearch,
+    initHeroSearch: initHeroSearch
+  };
+
+})(window);
+
+function initSiteNav() {
+var navToggle = document.getElementById("nav-toggle");
+  var navLinks = document.getElementById("nav-links");
+  if (!navToggle || !navLinks) {
+    return;
+  }
+
+  navToggle.addEventListener("click", function () {
+    var isOpen = navLinks.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  });
+
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    });
+  });
+}
+
+function initSiteCommon() {
+  initSiteNav();
+  StuvibeSearch.initNavSearch();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initSiteCommon();
+    function showToast(message) {
+      var toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("is-visible");
+      window.setTimeout(function () {
+        toast.classList.remove("is-visible");
+      }, 3200);
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var itemKey = params.get("item") || "Desk Chair";
+    var product = StuvibeProducts.getProduct(itemKey) || {
+      category: "Other",
+      breadcrumb: "item",
+      priceDisplay: "$0",
+      image: "banner1.png",
+      condition: "Good",
+      location: "Campus",
+      seller: "Richard",
+      rating: 3,
+      description: "Student-listed item. Contact seller for more details."
+    };
+
+    document.title = itemKey + " - Stuvibe";
+    document.getElementById("item-name").textContent = itemKey;
+    document.getElementById("item-price").textContent = product.priceDisplay || ("$" + product.price);
+    document.getElementById("item-condition").textContent = product.condition;
+    document.getElementById("item-location").textContent = product.location;
+    document.getElementById("item-description").textContent = product.description;
+    document.getElementById("product-photo").src = product.image;
+    document.getElementById("product-photo").alt = itemKey;
+    document.getElementById("seller-name").textContent = product.seller;
+    document.getElementById("reviews-heading").textContent = "Review for " + product.seller;
+    document.getElementById("breadcrumb-category").textContent = product.category;
+    document.getElementById("breadcrumb-category").href = "listings.html?category=" + encodeURIComponent(product.category);
+    document.getElementById("breadcrumb-item").textContent = product.breadcrumb || product.category.toLowerCase();
+    document.getElementById("chat-btn-label").textContent = "Chat with " + product.seller;
+    document.getElementById("connect-seller-name").textContent = product.seller;
+    document.getElementById("connect-item-name").textContent = itemKey;
+    document.getElementById("offer-item-name").textContent = itemKey;
+    document.getElementById("offer-list-price").textContent = product.priceDisplay || ("$" + product.price);
+
+    var recommendedGrid = document.getElementById("recommended-grid");
+    var allNames = StuvibeProducts.getProductNames().filter(function (name) {
+      return name !== itemKey;
+    });
+    for (var i = allNames.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = allNames[i];
+      allNames[i] = allNames[j];
+      allNames[j] = temp;
+    }
+    StuvibeProductUI.renderProductGrid(recommendedGrid, allNames.slice(0, 4));
+    StuvibeProductUI.initFavourites(recommendedGrid);
+
+    var connectModal = StuvibeModals.setupModal(document.getElementById("connect-modal"));
+    var offerModal = StuvibeModals.setupModal(document.getElementById("offer-modal"));
+
+    document.getElementById("chat-btn").addEventListener("click", connectModal.open);
+    document.getElementById("connect-cancel").addEventListener("click", connectModal.close);
+    document.getElementById("connect-submit").addEventListener("click", function () {
+      var message = document.getElementById("connect-message").value.trim();
+      if (!message) {
+        showToast("Please enter a message so the seller knows you are interested.");
+        return;
+      }
+      showToast("Your message was sent to " + product.seller + ".");
+      connectModal.close();
+      document.getElementById("connect-message").value = "";
+    });
+
+    document.getElementById("make-offer-btn").addEventListener("click", offerModal.open);
+    document.getElementById("offer-cancel").addEventListener("click", offerModal.close);
+    document.getElementById("offer-submit").addEventListener("click", function () {
+      var amount = document.getElementById("offer-amount").value.trim();
+      if (!amount || Number(amount) <= 0) {
+        showToast("Please enter a valid offer amount.");
+        return;
+      }
+      var note = document.getElementById("offer-note").value.trim();
+      var msg = "Your offer of $" + amount + " was sent to " + product.seller + ".";
+      if (note) {
+        msg += " They will see your note with the offer.";
+      }
+      showToast(msg);
+      offerModal.close();
+      document.getElementById("offer-amount").value = "";
+      document.getElementById("offer-note").value = "";
+    });
+
+    var copyrightYear = document.getElementById("copyright-year");
+    if (copyrightYear) {
+      copyrightYear.textContent = String(new Date().getFullYear());
+    }
+});
+  </script>
+</body>
+</html>

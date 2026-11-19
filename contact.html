@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Stuvibe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    :root {
+      --green-950: #08351f;
+      --green-900: #0f5132;
+      --green-700: #1f7a46;
+      --green-600: #166534;
+      --green-500: #2ca86b;
+      --green-300: #9cd4b4;
+      --green-100: #e9f8ef;
+      --yellow-500: #f5c544;
+      --yellow-400: #ffe38a;
+      --yellow-300: #ffebad;
+      --yellow-200: #fff4c7;
+      --yellow-100: #fff9e8;
+      --white: #ffffff;
+      --gray-900: #17212b;
+      --gray-800: #1f2937;
+      --gray-700: #415162;
+      --gray-200: #f1f3f5;
+      --dark-blue: #232152;
+      --dark-bg: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Nunito", Arial, Helvetica, sans-serif;
+      color: var(--gray-900);
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1200px, 94%);
+      margin: 0 auto;
+    }
+
+    /* --- Contact Form Section --- */
+    .contact-section {
+      padding: 4rem 0;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      min-height: calc(100vh - 70px - 300px);
+    }
+
+    .contact-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border: 1px solid #e8efe6;
+    }
+
+    .contact-card h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green-900);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card .subtitle {
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .field-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .field-group label {
+      display: block;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--gray-900);
+      margin-bottom: 0.4rem;
+    }
+
+    .field-group input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--gray-900);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      background: var(--white);
+    }
+
+    .field-group input:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 3px rgba(44, 168, 107, 0.15);
+    }
+
+    .field-group input.is-invalid {
+      border-color: #dc2626;
+    }
+
+    .field-group input.is-valid {
+      border-color: var(--green-500);
+    }
+
+    .field-error {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #dc2626;
+      margin-top: 0.3rem;
+      min-height: 1.2rem;
+    }
+
+    .submit-btn {
+      background: var(--green-700);
+      color: var(--white);
+      padding: 0.9rem 2.5rem;
+      border-radius: 99px;
+      border: none;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .submit-btn:hover { background: var(--green-900); }
+
+    /* --- Footer --- */
+    .main-footer { background: #fbfcf9; padding: 5rem 0 2rem; border-top: 1px solid #e8efe6; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1.5fr 1.5fr; gap: 4rem; margin-bottom: 4rem; }
+
+    .footer-brand .footer-logo {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      color: var(--green-950);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-brand .footer-logo span { color: var(--yellow-500); }
+
+    .footer-brand p { color: #666; margin-bottom: 2rem; line-height: 1.6; max-width: 320px; }
+    .social-links { display: flex; gap: 1rem; }
+    .social-links a { width: 36px; height: 36px; background: white; border: 1px solid #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #666; text-decoration: none; transition: 0.2s; }
+    .social-links a:hover { border-color: var(--green-500); color: var(--green-500); }
+    .footer-col h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; color: #111; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 1rem; }
+    .footer-col ul li a { text-decoration: none; color: #666; font-weight: 700; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--green-700); }
+
+    .copyright { background: #0b2819; color: #b8c2bf; text-align: center; padding: 2rem 0; font-weight: 700; font-size: 0.95rem; }
+
+    /* --- Back to Top --- */
+    .back-to-top {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--green-700);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 101;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+      white-space: nowrap;
+    }
+
+    /* --- Thank You Modal --- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.is-open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      animation: modalFadeIn 0.25s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-content i {
+      font-size: 3.5rem;
+      color: var(--green-500);
+      margin-bottom: 1rem;
+    }
+
+    .modal-content h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-content .thankyou-text {
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .submitted-data-list {
+      list-style: none;
+      text-align: left;
+      background: var(--green-100);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .submitted-data-list li {
+      padding: 0.5rem 0;
+      font-weight: 600;
+      color: var(--gray-900);
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .submitted-data-list li:last-child {
+      border-bottom: none;
+    }
+
+    .submitted-data-list li strong {
+      color: var(--green-900);
+    }
+
+    .submitted-data-list li span {
+      color: var(--gray-700);
+      text-align: right;
+      max-width: 60%;
+      word-break: break-word;
+    }
+
+    .modal-content .submit-btn {
+      width: auto;
+      padding: 0.9rem 3rem;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .contact-card {
+        padding: 2rem 1.5rem;
+      }
+      .contact-card h1 {
+        font-size: 1.6rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .modal-content {
+        padding: 2rem 1.5rem;
+      }
+      .submitted-data-list li {
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .submitted-data-list li span {
+        text-align: left;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .contact-card {
+        padding: 1.5rem 1rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <a href="homepage.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-links" class="nav-links">
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="saved.html" class="nav-saved"><i class="fa-solid fa-heart" aria-hidden="true"></i><span class="nav-saved-text">Saved</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-card">
+          <h1>Contact Us</h1>
+          <p class="subtitle">We'd love to hear from you. Fill in your details and we'll get back to you.</p>
+
+          <form id="contact-form" novalidate>
+            <div class="field-group">
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Your full name" autocomplete="name">
+              <span id="name-error" class="field-error"></span>
+            </div>
+
+            <div class="field-group">
+              <label for="phone">Phone</label>
+              <input id="phone" type="tel" placeholder="e.g. 0412 345 678" autocomplete="tel">
+              <span id="phone-error" class="field-error"></span>
+            </div>
+
+            <div class="field-group">
+              <label for="age">Age</label>
+              <input id="age" type="number" placeholder="Your age" min="16" max="120">
+              <span id="age-error" class="field-error"></span>
+            </div>
+
+            <div class="field-group">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="name@example.com" autocomplete="email">
+              <span id="email-error" class="field-error"></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="homepage.html" class="footer-logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+          <p>Making student living smarter, greener and more enjoyable with chill vibes</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="safety-tips.html">Safety Tips</a></li>
+            <li><a href="community-rules.html">Community Rules</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; <span id="copyright-year">2026</span> Stuvibe. Smart vibes, smarter savings for students.
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Thank You Modal -->
+  <div id="thankyou-modal" class="modal-overlay">
+    <div class="modal-content">
+      <i class="fa-solid fa-circle-check"></i>
+      <h2>Thank You!</h2>
+      <p class="thankyou-text">Your message has been received. Here's a summary of what you submitted:</p>
+      <ul class="submitted-data-list">
+        <li><strong>Name:</strong> <span id="display-name"></span></li>
+        <li><strong>Phone:</strong> <span id="display-phone"></span></li>
+        <li><strong>Age:</strong> <span id="display-age"></span></li>
+        <li><strong>Email:</strong> <span id="display-email"></span></li>
+      </ul>
+      <button id="modal-close" class="submit-btn">Close</button>
+    </div>
+  </div>
+  <script>
+(function (global) {
+  function listingsUrl(query, category) {
+    var params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (category && category !== "all" && category !== "All Categories") {
+      params.set("category", category);
+    }
+    var qs = params.toString();
+    return "listings.html" + (qs ? "?" + qs : "");
+  }
+  function initNavSearch() {
+    var nav = document.querySelector(".topbar .nav");
+    if (!nav || nav.querySelector(".nav-search")) return;
+    var params = new URLSearchParams(window.location.search);
+    var currentQ = params.get("q") || "";
+    var form = document.createElement("form");
+    form.className = "nav-search";
+    form.setAttribute("role", "search");
+    form.setAttribute("aria-label", "Search listings");
+    form.action = "listings.html";
+    form.method = "get";
+    form.innerHTML =
+      '<label for="nav-search-input" class="sr-only">Search items</label>' +
+      '<input id="nav-search-input" type="search" name="q" placeholder="Search items..." value="' + currentQ.replace(/"/g, "&quot;") + '">' +
+      '<button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>';
+    var toggle = document.getElementById("nav-toggle");
+    if (toggle) nav.insertBefore(form, toggle);
+    else nav.appendChild(form);
+  }
+  global.StuvibeSearch = { listingsUrl: listingsUrl, initNavSearch: initNavSearch };
+})(window);
+
+function initSiteNav() {
+  var navToggle = document.getElementById("nav-toggle");
+  var navLinks = document.getElementById("nav-links");
+  if (!navToggle || !navLinks) return;
+  navToggle.addEventListener("click", function () {
+    var isOpen = navLinks.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  });
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initSiteNav();
+  StuvibeSearch.initNavSearch();
+
+var backToTopButton = document.getElementById("back-to-top");
+    var copyrightYear = document.getElementById("copyright-year");
+
+    var form = document.getElementById("contact-form");
+    var nameInput = document.getElementById("name");
+    var phoneInput = document.getElementById("phone");
+    var ageInput = document.getElementById("age");
+    var emailInput = document.getElementById("email");
+    var nameError = document.getElementById("name-error");
+    var phoneError = document.getElementById("phone-error");
+    var ageError = document.getElementById("age-error");
+    var emailError = document.getElementById("email-error");
+
+    var modal = document.getElementById("thankyou-modal");
+    var modalClose = document.getElementById("modal-close");
+    var displayName = document.getElementById("display-name");
+    var displayPhone = document.getElementById("display-phone");
+    var displayAge = document.getElementById("display-age");
+    var displayEmail = document.getElementById("display-email");
+
+    var nameRegex = /^[A-Za-z\s]+$/;
+    var phoneRegex = /^[\d\s\-\+\(\)]{8,20}$/;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function validateName() {
+      var value = nameInput.value.trim();
+      if (!value) {
+        nameError.textContent = "Name is required.";
+        nameInput.classList.add("is-invalid");
+        nameInput.classList.remove("is-valid");
+        return false;
+      }
+      if (!nameRegex.test(value)) {
+        nameError.textContent = "Name must contain only letters and spaces.";
+        nameInput.classList.add("is-invalid");
+        nameInput.classList.remove("is-valid");
+        return false;
+      }
+      nameError.textContent = "";
+      nameInput.classList.remove("is-invalid");
+      nameInput.classList.add("is-valid");
+      return true;
+    }
+
+    function validatePhone() {
+      var value = phoneInput.value.trim();
+      if (!value) {
+        phoneError.textContent = "Phone number is required.";
+        phoneInput.classList.add("is-invalid");
+        phoneInput.classList.remove("is-valid");
+        return false;
+      }
+      if (!phoneRegex.test(value)) {
+        phoneError.textContent = "Please enter a valid phone number (e.g. 0412 345 678).";
+        phoneInput.classList.add("is-invalid");
+        phoneInput.classList.remove("is-valid");
+        return false;
+      }
+      phoneError.textContent = "";
+      phoneInput.classList.remove("is-invalid");
+      phoneInput.classList.add("is-valid");
+      return true;
+    }
+
+    function validateAge() {
+      var value = ageInput.value.trim();
+      if (!value) {
+        ageError.textContent = "Age is required.";
+        ageInput.classList.add("is-invalid");
+        ageInput.classList.remove("is-valid");
+        return false;
+      }
+      var num = parseInt(value, 10);
+      if (isNaN(num) || num < 16 || num > 120) {
+        ageError.textContent = "Age must be between 16 and 120.";
+        ageInput.classList.add("is-invalid");
+        ageInput.classList.remove("is-valid");
+        return false;
+      }
+      ageError.textContent = "";
+      ageInput.classList.remove("is-invalid");
+      ageInput.classList.add("is-valid");
+      return true;
+    }
+
+    function validateEmail() {
+      var value = emailInput.value.trim();
+      if (!value) {
+        emailError.textContent = "Email is required.";
+        emailInput.classList.add("is-invalid");
+        emailInput.classList.remove("is-valid");
+        return false;
+      }
+      if (!emailRegex.test(value)) {
+        emailError.textContent = "Please enter a valid email address.";
+        emailInput.classList.add("is-invalid");
+        emailInput.classList.remove("is-valid");
+        return false;
+      }
+      emailError.textContent = "";
+      emailInput.classList.remove("is-invalid");
+      emailInput.classList.add("is-valid");
+      return true;
+    }
+
+    nameInput.addEventListener("input", validateName);
+    phoneInput.addEventListener("input", validatePhone);
+    ageInput.addEventListener("input", validateAge);
+    emailInput.addEventListener("input", validateEmail);
+
+    nameInput.addEventListener("blur", validateName);
+    phoneInput.addEventListener("blur", validatePhone);
+    ageInput.addEventListener("blur", validateAge);
+    emailInput.addEventListener("blur", validateEmail);
+
+    function showModal(data) {
+      displayName.textContent = data.name;
+      displayPhone.textContent = data.phone;
+      displayAge.textContent = data.age;
+      displayEmail.textContent = data.email;
+      modal.classList.add("is-open");
+    }
+
+    function hideModal() {
+      modal.classList.remove("is-open");
+      sessionStorage.removeItem("contactFormData");
+      form.reset();
+      [nameInput, phoneInput, ageInput, emailInput].forEach(function(input) {
+        input.classList.remove("is-valid", "is-invalid");
+      });
+      [nameError, phoneError, ageError, emailError].forEach(function(el) {
+        el.textContent = "";
+      });
+      nameInput.focus();
+    }
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var isNameValid = validateName();
+      var isPhoneValid = validatePhone();
+      var isAgeValid = validateAge();
+      var isEmailValid = validateEmail();
+
+      if (!isNameValid || !isPhoneValid || !isAgeValid || !isEmailValid) {
+        if (!isNameValid) { nameInput.focus(); }
+        else if (!isPhoneValid) { phoneInput.focus(); }
+        else if (!isAgeValid) { ageInput.focus(); }
+        else if (!isEmailValid) { emailInput.focus(); }
+        return;
+      }
+
+      var formData = {
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        age: ageInput.value.trim(),
+        email: emailInput.value.trim()
+      };
+
+      sessionStorage.setItem("contactFormData", JSON.stringify(formData));
+      showModal(formData);
+    });
+
+    modalClose.addEventListener("click", hideModal);
+
+    modal.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        hideModal();
+      }
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        hideModal();
+      }
+    });
+
+    window.addEventListener("load", function() {
+      var stored = sessionStorage.getItem("contactFormData");
+      if (stored) {
+        try {
+          var data = JSON.parse(stored);
+          showModal(data);
+        } catch (e) {
+          sessionStorage.removeItem("contactFormData");
+        }
+      }
+    });
+
+    window.addEventListener("scroll", function() {
+      backToTopButton.classList.toggle("visible", window.scrollY > 500);
+    });
+
+    backToTopButton.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    if (copyrightYear) {
+      copyrightYear.textContent = String(new Date().getFullYear());
+    }
+
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listings - Stuvibe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    :root {
+      --green-950: #08351f;
+      --green-900: #0f5132;
+      --green-700: #1f7a46;
+      --green-100: #e9f8ef;
+      --yellow-500: #f5c544;
+      --yellow-400: #ffe38a;
+      --yellow-200: #fff4c7;
+      --gray-900: #17212b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Nunito", Arial, sans-serif; background: #f6faf7; color: var(--gray-900); }
+    .container { width: min(1100px, 94%); margin: 0 auto; }
+    main { padding: 2rem 0 4rem; }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid #cde5d6;
+      background: #fff;
+      color: var(--green-900);
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+    .filter-btn:hover { background: var(--green-100); }
+    .filter-btn.active {
+      background: var(--green-900);
+      color: #fff;
+      border-color: var(--green-900);
+    }
+    .sort-select {
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid #cde5d6;
+      background: #fff;
+      color: var(--green-900);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .grid { margin: 1rem 0 3rem; }
+    #filter-note { font-weight: 700; color: #666; }
+    .filter-select {
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid #cde5d6;
+      background: #fff;
+      color: var(--green-900);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      outline: none;
+      min-width: 140px;
+    }
+
+    @media (max-width: 768px) {
+      .controls-bar { flex-direction: column; align-items: stretch; }
+      .filter-select { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+    <header class="topbar">
+    <div class="container nav">
+      <a href="homepage.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-links" class="nav-links">
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="saved.html" class="nav-saved"><i class="fa-solid fa-heart" aria-hidden="true"></i><span class="nav-saved-text">Saved</span></a></li>
+      </ul>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Browse Listings</h1>
+    <p id="filter-note">Discover items posted by students and view details before you connect.</p>
+
+    <div class="controls-bar">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Textbooks">Textbooks</button>
+        <button class="filter-btn" data-filter="Electronics">Electronics</button>
+        <button class="filter-btn" data-filter="Furniture">Furniture</button>
+        <button class="filter-btn" data-filter="Clothing">Clothing</button>
+        <button class="filter-btn" data-filter="Transport">Transport</button>
+      </div>
+      <select id="size-select" class="filter-select">
+        <option value="all">All Sizes</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="N/A">N/A</option>
+      </select>
+      <select id="location-select" class="filter-select">
+        <option value="all">All Locations</option>
+      </select>
+      <select id="sort-select" class="sort-select">
+        <option value="default">Sort</option>
+        <option value="price-asc">Price: Low–High</option>
+        <option value="price-desc">Price: High–Low</option>
+        <option value="name-asc">Name: A–Z</option>
+        <option value="name-desc">Name: Z–A</option>
+      </select>
+    </div>
+
+    <div class="grid" id="product-grid"></div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="homepage.html" class="footer-logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+          <p>Making student living smarter, greener and more enjoyable with chill vibes</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="safety-tips.html">Safety Tips</a></li>
+            <li><a href="community-rules.html">Community Rules</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; <span id="copyright-year">2026</span> Stuvibe. Smart vibes, smarter savings for students.
+    </div>
+  </footer>
+
+  <script>
+(function (global) {
+  var CUSTOM_KEY = "stuvibe-custom-listings";
+
+  var CATALOG = {
+    "Artificial Intelligence": {
+      category: "Textbooks",
+      breadcrumb: "textbooks",
+      price: 50,
+      priceDisplay: "$50",
+      image: "textbook.jpeg",
+      condition: "Like new",
+      location: "CQU Melbourne",
+      seller: "Richard",
+      rating: 3,
+      size: "N/A",
+      description: "Artificial Intelligence textbook used for one semester. No missing pages, minimal highlighting."
+    },
+    "HP 2024": {
+      category: "Electronics",
+      breadcrumb: "laptops",
+      price: 300,
+      priceDisplay: "$300",
+      image: "electronichp.png",
+      condition: "Excellent",
+      location: "RMIT Swanston",
+      seller: "Richard",
+      rating: 3,
+      size: "N/A",
+      description: "HP laptop 2024 model. Battery health good, includes charger. Perfect for study and assignments."
+    },
+    "Desk Chair": {
+      category: "Furniture",
+      breadcrumb: "indoor",
+      price: 30,
+      priceDisplay: "$30",
+      image: "furniture.jpeg",
+      condition: "Good",
+      location: "Near Flinders Station",
+      seller: "Richard",
+      rating: 3,
+      size: "N/A",
+      description: "Comfortable desk chair in good condition. Ideal for dorm or shared housing. Pick up near campus."
+    },
+    "Winter Jacket": {
+      category: "Clothing",
+      breadcrumb: "outerwear",
+      price: 70,
+      priceDisplay: "$70",
+      image: "clothing.png",
+      condition: "Very good",
+      location: "ACU Sydney",
+      seller: "Richard",
+      rating: 3,
+      size: "M",
+      description: "Warm winter jacket, size M. Worn a few times, clean and ready for the next owner."
+    },
+    "Bike": {
+      category: "Transport",
+      breadcrumb: "bike",
+      price: 120,
+      priceDisplay: "$120",
+      image: "transport.webp",
+      condition: "Good",
+      location: "Melbourne Uni",
+      seller: "Richard",
+      rating: 3,
+      size: "N/A",
+      description: "Student bike in good condition. Perfect for getting around campus and nearby areas. Helmet included."
+    }
+  };
+
+  function getCustomListings() {
+    try {
+      return JSON.parse(localStorage.getItem(CUSTOM_KEY) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCustomListings(list) {
+    localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
+  }
+
+  function normalizeProduct(name, data) {
+    var product = Object.assign({}, data);
+    product.name = name;
+    if (typeof product.price === "number" && !product.priceDisplay) {
+      product.priceDisplay = "$" + product.price;
+    }
+    if (!product.price && product.priceDisplay) {
+      product.price = parsePrice(product);
+    }
+    return product;
+  }
+
+  function getAllProducts() {
+    var merged = {};
+    Object.keys(CATALOG).forEach(function (name) {
+      merged[name] = normalizeProduct(name, CATALOG[name]);
+    });
+    getCustomListings().forEach(function (item) {
+      if (item && item.name) {
+        merged[item.name] = normalizeProduct(item.name, item);
+      }
+    });
+    return merged;
+  }
+
+  function getProduct(name) {
+    return getAllProducts()[name] || null;
+  }
+
+  function getProductNames() {
+    return Object.keys(getAllProducts());
+  }
+
+  function parsePrice(product) {
+    if (typeof product.price === "number") {
+      return product.price;
+    }
+    return parseFloat(String(product.priceDisplay || product.price || "0").replace(/[^0-9.]/g, "")) || 0;
+  }
+
+  function addProduct(product) {
+    var custom = getCustomListings();
+    var entry = normalizeProduct(product.name, product);
+    custom = custom.filter(function (item) {
+      return item.name !== entry.name;
+    });
+    custom.unshift(entry);
+    saveCustomListings(custom);
+    return entry;
+  }
+
+  global.StuvibeProducts = {
+    CATALOG: CATALOG,
+    getAllProducts: getAllProducts,
+    getProduct: getProduct,
+    getProductNames: getProductNames,
+    parsePrice: parsePrice,
+    addProduct: addProduct,
+    getCustomListings: getCustomListings
+  };
+})(window);
+
+(function (global) {
+  var FAV_KEY = "stuvibe-favourites";
+
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function getFavourites() {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
+    } catch (e) {
+      return new Set();
+    }
+  }
+
+  function saveFavourites(set) {
+    localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(set)));
+  }
+
+  function renderProductCard(name, product, options) {
+    options = options || {};
+    var tagClass = options.tagClass || "tag";
+    var price = product.priceDisplay || ("$" + product.price);
+    var detailUrl = "product-detail.html?item=" + encodeURIComponent(name);
+    var alt = escapeHtml(product.alt || name);
+
+    var size = product.size || "N/A";
+    return (
+      '<article class="product-card" data-category="' + escapeHtml(product.category) + '" data-name="' + escapeHtml(name) + '" data-price="' + global.StuvibeProducts.parsePrice(product) + '" data-size="' + escapeHtml(size) + '" data-location="' + escapeHtml(product.location) + '">' +
+        '<div class="img-wrap">' +
+          '<span class="' + tagClass + '">' + escapeHtml(product.category) + "</span>" +
+          '<button class="heart" type="button" aria-label="Add ' + escapeHtml(name) + ' to favourites"><i class="fa-solid fa-heart"></i></button>' +
+          '<img src="' + escapeHtml(product.image) + '" alt="' + alt + '" loading="lazy">' +
+        "</div>" +
+        '<div class="p-info">' +
+          "<h3>" + escapeHtml(name) + "</h3>" +
+          '<div class="p-loc"><i class="fa-solid fa-location-dot"></i> ' + escapeHtml(product.location) + "</div>" +
+          '<div class="p-foot">' +
+            '<span class="p-price">' + escapeHtml(price) + "</span>" +
+            '<a href="' + detailUrl + '" class="p-detail">View detail</a>' +
+          "</div>" +
+        "</div>" +
+      "</article>"
+    );
+  }
+
+  function applyFavouriteState(root) {
+    var favourites = getFavourites();
+    (root || document).querySelectorAll(".product-card").forEach(function (card) {
+      var button = card.querySelector(".heart");
+      if (!button) {
+        return;
+      }
+      var productName = card.getAttribute("data-name") || "";
+      var isFavourite = favourites.has(productName);
+      button.classList.toggle("is-favorite", isFavourite);
+      button.setAttribute(
+        "aria-label",
+        (isFavourite ? "Remove " : "Add ") + productName + (isFavourite ? " from favourites" : " to favourites")
+      );
+    });
+  }
+
+  function initFavourites(root) {
+    var container = root || document;
+    container.addEventListener("click", function (event) {
+      var button = event.target.closest(".heart");
+      if (!button) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      var card = button.closest(".product-card");
+      if (!card) {
+        return;
+      }
+      var productName = card.getAttribute("data-name") || "";
+      var favourites = getFavourites();
+      if (favourites.has(productName)) {
+        favourites.delete(productName);
+      } else {
+        favourites.add(productName);
+      }
+      saveFavourites(favourites);
+      applyFavouriteState(container);
+    });
+    applyFavouriteState(container);
+  }
+
+  function renderProductGrid(gridEl, names, options) {
+    if (!gridEl) {
+      return [];
+    }
+    var products = global.StuvibeProducts.getAllProducts();
+    var html = names
+      .map(function (name) {
+        return products[name] ? renderProductCard(name, products[name], options) : "";
+      })
+      .join("");
+    gridEl.innerHTML = html;
+    applyFavouriteState(gridEl);
+    return Array.from(gridEl.querySelectorAll(".product-card"));
+  }
+
+  global.StuvibeProductUI = {
+    escapeHtml: escapeHtml,
+    renderProductCard: renderProductCard,
+    renderProductGrid: renderProductGrid,
+    initFavourites: initFavourites,
+    applyFavouriteState: applyFavouriteState,
+    getFavourites: getFavourites
+  };
+})(window);
+
+(function (global) {
+  function getFocusable(container) {
+    return Array.from(
+      container.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter(function (el) {
+      return el.offsetParent !== null;
+    });
+  }
+
+  function setupModal(modalEl) {
+    if (!modalEl) {
+      return { open: function () {}, close: function () {} };
+    }
+
+    var dialog = modalEl.querySelector(".offer-dialog");
+    var lastFocus = null;
+
+    function open() {
+      lastFocus = document.activeElement;
+      modalEl.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      var focusable = getFocusable(dialog || modalEl);
+      if (focusable.length) {
+        focusable[0].focus();
+      }
+    }
+
+    function close() {
+      modalEl.classList.remove("is-open");
+      document.body.style.overflow = "";
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    }
+
+    modalEl.addEventListener("click", function (event) {
+      if (event.target === modalEl) {
+        close();
+      }
+    });
+
+    modalEl.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab" || !modalEl.classList.contains("is-open")) {
+        return;
+      }
+      var focusable = getFocusable(dialog || modalEl);
+      if (!focusable.length) {
+        return;
+      }
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    return { open: open, close: close };
+  }
+
+  global.StuvibeModals = { setupModal: setupModal };
+})(window);
+
+(function (global) {
+  function listingsUrl(query, category) {
+    var params = new URLSearchParams();
+    if (query) {
+      params.set("q", query);
+    }
+    if (category && category !== "all" && category !== "All Categories") {
+      params.set("category", category);
+    }
+    var qs = params.toString();
+    return "listings.html" + (qs ? "?" + qs : "");
+  }
+
+  function initNavSearch() {
+    var nav = document.querySelector(".topbar .nav");
+    if (!nav || nav.querySelector(".nav-search")) {
+      return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var currentQ = params.get("q") || "";
+
+    var form = document.createElement("form");
+    form.className = "nav-search";
+    form.setAttribute("role", "search");
+    form.setAttribute("aria-label", "Search listings");
+    form.action = "listings.html";
+    form.method = "get";
+    form.innerHTML =
+      '<label for="nav-search-input" class="sr-only">Search items</label>' +
+      '<input id="nav-search-input" type="search" name="q" placeholder="Search items..." value="' + currentQ.replace(/"/g, "&quot;") + '">' +
+      '<button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>';
+
+    var toggle = document.getElementById("nav-toggle");
+    if (toggle) {
+      nav.insertBefore(form, toggle);
+    } else {
+      nav.appendChild(form);
+    }
+  }
+
+  function initHeroSearch(formSelector) {
+    var searchInput = document.getElementById("search-input");
+    var searchCategory = document.getElementById("search-category");
+    var searchButton = document.getElementById("search-btn");
+    if (!searchInput || !searchCategory) {
+      return;
+    }
+
+    function goToListings() {
+      window.location.href = listingsUrl(searchInput.value.trim(), searchCategory.value);
+    }
+
+    if (searchButton) {
+      searchButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        goToListings();
+      });
+    }
+
+    var wrapper = document.querySelector(formSelector || ".search-wrapper");
+    if (wrapper) {
+      wrapper.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          goToListings();
+        }
+      });
+    }
+  }
+
+  global.StuvibeSearch = {
+    listingsUrl: listingsUrl,
+    initNavSearch: initNavSearch,
+    initHeroSearch: initHeroSearch
+  };
+
+})(window);
+
+function initSiteNav() {
+var navToggle = document.getElementById("nav-toggle");
+  var navLinks = document.getElementById("nav-links");
+  if (!navToggle || !navLinks) {
+    return;
+  }
+
+  navToggle.addEventListener("click", function () {
+    var isOpen = navLinks.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  });
+
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    });
+  });
+}
+
+function initSiteCommon() {
+  initSiteNav();
+  StuvibeSearch.initNavSearch();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initSiteCommon();
+  var copyrightYear = document.getElementById("copyright-year");
+  if (copyrightYear) { copyrightYear.textContent = String(new Date().getFullYear()); }
+
+  var grid = document.getElementById("product-grid");
+  var filterBtns = document.querySelectorAll(".filter-btn");
+  var sortSelect = document.getElementById("sort-select");
+  var sizeSelect = document.getElementById("size-select");
+  var locationSelect = document.getElementById("location-select");
+  var filterNote = document.getElementById("filter-note");
+  var currentFilter = "all";
+  var cards = [];
+  var favouritesReady = false;
+
+  function getAllNames() {
+    return StuvibeProducts.getProductNames();
+  }
+
+  function renderGrid() {
+    var names = getAllNames();
+  var customFirst = StuvibeProducts.getCustomListings().map(function (p) {
+      return p.name;
+    });
+    var ordered = customFirst.concat(
+      names.filter(function (n) {
+        return customFirst.indexOf(n) === -1;
+      })
+    );
+    cards = StuvibeProductUI.renderProductGrid(grid, ordered, { tagClass: "tag-label" });
+    if (!favouritesReady) {
+      StuvibeProductUI.initFavourites(grid);
+      favouritesReady = true;
+    } else {
+      StuvibeProductUI.applyFavouriteState(grid);
+    }
+    populateLocationOptions();
+    applySearchAndFilter();
+  }
+
+  function populateLocationOptions() {
+    if (!locationSelect) return;
+    while (locationSelect.options.length > 1) {
+      locationSelect.remove(1);
+    }
+    var locations = {};
+    var allProducts = StuvibeProducts.getAllProducts();
+    for (var key in allProducts) {
+      if (allProducts.hasOwnProperty(key)) {
+        var loc = allProducts[key].location;
+        if (loc) { locations[loc] = true; }
+      }
+    }
+    var sorted = Object.keys(locations).sort();
+    sorted.forEach(function (loc) {
+      var opt = document.createElement("option");
+      opt.value = loc;
+      opt.textContent = loc;
+      locationSelect.appendChild(opt);
+    });
+  }
+
+  function getCategory(card) {
+    return card.getAttribute("data-category");
+  }
+
+  function getName(card) {
+    return card.getAttribute("data-name");
+  }
+
+  function getPrice(card) {
+    return parseFloat(card.getAttribute("data-price")) || 0;
+  }
+
+  function applySearchAndFilter() {
+    var selectedSize = sizeSelect ? sizeSelect.value : "all";
+    var selectedLocation = locationSelect ? locationSelect.value : "all";
+
+    var visible = [];
+    cards.forEach(function (card) {
+      var name = getName(card).toLowerCase();
+      var category = getCategory(card);
+      var size = card.getAttribute("data-size") || "N/A";
+      var location = card.getAttribute("data-location") || "";
+      var matchCategory = currentFilter === "all" || category === currentFilter;
+      var matchSize = selectedSize === "all" || size === selectedSize;
+      var matchLocation = selectedLocation === "all" || location === selectedLocation;
+      var match = matchCategory && matchSize && matchLocation;
+      card.classList.toggle("is-hidden", !match);
+      if (match) {
+        visible.push(card);
+      }
+    });
+
+    var parts = [];
+    if (currentFilter !== "all") {
+      parts.push(currentFilter.toLowerCase());
+    }
+    if (selectedSize !== "all") {
+      parts.push("size " + selectedSize);
+    }
+    if (selectedLocation !== "all") {
+      parts.push(selectedLocation);
+    }
+    var label = parts.length ? parts.join(", ") : "all items";
+    var note = "Showing " + label + " (" + visible.length + " item" + (visible.length !== 1 ? "s" : "") + ").";
+    filterNote.textContent = note;
+
+    var sortBy = sortSelect.value;
+    if (sortBy !== "default") {
+      visible.sort(function (a, b) {
+        if (sortBy === "price-asc") return getPrice(a) - getPrice(b);
+        if (sortBy === "price-desc") return getPrice(b) - getPrice(a);
+        if (sortBy === "name-asc") return getName(a).localeCompare(getName(b));
+        if (sortBy === "name-desc") return getName(b).localeCompare(getName(a));
+        return 0;
+      });
+    }
+    visible.forEach(function (card) {
+      grid.appendChild(card);
+    });
+    return visible;
+  }
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filterBtns.forEach(function (b) {
+        b.classList.remove("active");
+      });
+      btn.classList.add("active");
+      currentFilter = btn.getAttribute("data-filter");
+      applySearchAndFilter();
+    });
+  });
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", applySearchAndFilter);
+  }
+
+  if (sizeSelect) {
+    sizeSelect.addEventListener("change", applySearchAndFilter);
+  }
+
+  if (locationSelect) {
+    locationSelect.addEventListener("change", applySearchAndFilter);
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var categoryParam = params.get("category");
+  if (categoryParam) {
+    filterBtns.forEach(function (btn) {
+      if (btn.getAttribute("data-filter") === categoryParam) {
+        btn.click();
+      }
+    });
+  }
+
+  renderGrid();
+
+});
+  </script>
+</body>
+</html>

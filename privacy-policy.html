@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Stuvibe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    :root {
+      --green-950: #08351f;
+      --green-900: #0f5132;
+      --green-700: #1f7a46;
+      --yellow-500: #f5c544;
+      --gray-900: #17212b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Nunito", Arial, sans-serif; background: #f6faf7; color: var(--gray-900); line-height: 1.6; }
+    .container { width: min(900px, 94%); margin: 0 auto; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { text-decoration: none; font-weight: 900; font-size: 1.6rem; color: var(--green-950); display: flex; align-items: center; gap: 8px; }
+    .logo span { color: var(--yellow-500); }
+    main { padding: 2rem 0 4rem; }
+    .card { background: #fff; border-radius: 12px; padding: 1.2rem; box-shadow: 0 8px 20px rgba(0,0,0,.08); margin-top: 1rem; }
+    .card p { margin-top: 1rem; }
+    .card ul { padding-left: 1.1rem; margin-top: .5rem; }
+    .card ul li { margin-top: .5rem; }
+
+  </style>
+</head>
+<body>
+    <header class="topbar">
+    <div class="container nav">
+      <a href="homepage.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-links" class="nav-links">
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="saved.html" class="nav-saved"><i class="fa-solid fa-heart" aria-hidden="true"></i><span class="nav-saved-text">Saved</span></a></li>
+      </ul>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Privacy Policy</h1>
+    <section class="card">
+      <ul>
+        <li>Stuvibe collects limited account and listing data to help students discover items and connect on campus.</li>
+        <li>We do not sell personal data. We only use your information for account management, safety checks, and user support.</li>
+        <li>You can request updates or deletion of your profile data by contacting our support team.</li>
+      </ul>
+      </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="homepage.html" class="footer-logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+          <p>Making student living smarter, greener and more enjoyable with chill vibes</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="safety-tips.html">Safety Tips</a></li>
+            <li><a href="community-rules.html">Community Rules</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; <span id="copyright-year">2026</span> Stuvibe. Smart vibes, smarter savings for students.
+    </div>
+  </footer>
+
+  <script>
+(function (global) {
+  function listingsUrl(query, category) {
+    var params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (category && category !== "all" && category !== "All Categories") {
+      params.set("category", category);
+    }
+    var qs = params.toString();
+    return "listings.html" + (qs ? "?" + qs : "");
+  }
+  function initNavSearch() {
+    var nav = document.querySelector(".topbar .nav");
+    if (!nav || nav.querySelector(".nav-search")) return;
+    var params = new URLSearchParams(window.location.search);
+    var currentQ = params.get("q") || "";
+    var form = document.createElement("form");
+    form.className = "nav-search";
+    form.setAttribute("role", "search");
+    form.setAttribute("aria-label", "Search listings");
+    form.action = "listings.html";
+    form.method = "get";
+    form.innerHTML =
+      '<label for="nav-search-input" class="sr-only">Search items</label>' +
+      '<input id="nav-search-input" type="search" name="q" placeholder="Search items..." value="' + currentQ.replace(/"/g, "&quot;") + '">' +
+      '<button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>';
+    var toggle = document.getElementById("nav-toggle");
+    if (toggle) nav.insertBefore(form, toggle);
+    else nav.appendChild(form);
+  }
+  global.StuvibeSearch = { listingsUrl: listingsUrl, initNavSearch: initNavSearch };
+})(window);
+
+function initSiteNav() {
+  var navToggle = document.getElementById("nav-toggle");
+  var navLinks = document.getElementById("nav-links");
+  if (!navToggle || !navLinks) return;
+  navToggle.addEventListener("click", function () {
+    var isOpen = navLinks.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  });
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initSiteNav();
+  StuvibeSearch.initNavSearch();
+  var copyrightYear = document.getElementById("copyright-year");
+  if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
+});
+
+  </script>
+</body>
+</html>

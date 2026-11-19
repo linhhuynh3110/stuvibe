@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stuvibe - Smart Vibes for Students</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome cho Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    :root {
+      --green-950: #08351f;
+      --green-900: #0f5132;
+      --green-700: #1f7a46;
+      --green-600: #166534;
+      --green-500: #2ca86b;
+      --green-300: #9cd4b4;
+      --green-100: #e9f8ef;
+      --yellow-500: #f5c544;
+      --yellow-400: #ffe38a;
+      --yellow-300: #ffebad;
+      --yellow-200: #fff4c7;
+      --yellow-100: #fff9e8;
+      --white: #ffffff;
+      --gray-900: #17212b;
+      --gray-800: #1f2937;
+      --gray-700: #415162;
+      --gray-200: #f1f3f5;
+      --dark-blue: #232152;
+      --dark-bg: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Nunito", Arial, Helvetica, sans-serif;
+      color: var(--gray-900);
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1200px, 94%);
+      margin: 0 auto;
+    }
+
+    /* --- Hero Section & Search Bar --- */
+    .hero { 
+      padding: 2rem 0; 
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+    }
+    .hero-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid #dbeadb;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      min-height: 480px;
+      background: url("banner1.png") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(8, 53, 31, 0.82) 0%, rgba(8, 53, 31, 0.58) 45%, rgba(8, 53, 31, 0.24) 100%);
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 3.8rem;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero h1 { font-size: clamp(2rem, 3.7vw, 2.6rem); font-weight: 900; line-height: 1.18; margin-bottom: 0.75rem; color: var(--yellow-300); white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.28); }
+    .hero-sub {
+      font-size: 0.96rem;
+      color: #edf5f0;
+      max-width: 100%;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      white-space: nowrap;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+    }
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+    .hero-pill {
+      background: rgba(255,255,255,0.94);
+      color: #234f39;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 99px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    
+    /* Search Bar Design */
+    .search-container {
+      margin-top: 1rem;
+      position: relative;
+    }
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 99px;
+      padding: 6px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 650px;
+    }
+    .search-input-group {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      padding-left: 1.5rem;
+    }
+    .search-input-group i { color: #9ca3af; margin-right: 10px; }
+    .search-input-group input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 1rem;
+      color: #374151;
+      font-family: inherit;
+    }
+    .search-category {
+      border-left: 1px solid #e5e7eb;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .search-category select {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-weight: 600;
+      color: #374151;
+      cursor: pointer;
+    }
+    .search-btn {
+      background: var(--green-700);
+      color: white;
+      padding: 10px 28px;
+      border-radius: 99px;
+      border: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-btn:hover { background: var(--green-900); }
+    .search-results-count {
+      margin-top: 0.75rem;
+      color: #e6f4ed;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    /* --- Category Section --- */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.2rem;
+      margin: 2rem 0 4rem;
+    }
+    .cat-card {
+      padding: 1.5rem 1rem;
+      border-radius: 16px;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      transition: 0.3s;
+    }
+    .cat-card:hover { transform: translateY(-5px); }
+    .cat-icon { font-size: 1.5rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+    .cat-card span { font-weight: 800; color: #1a1a1a; font-size: 0.95rem; }
+
+    .cat-1 { background: var(--green-100); color: var(--green-900); }
+    .cat-2 { background: var(--yellow-100); color: #9a6700; }
+    .cat-3 { background: #f2faef; color: #2b6e45; }
+    .cat-4 { background: #fff6d9; color: #8a5a00; }
+    .cat-5 { background: #edf8f2; color: var(--green-700); }
+    .cat-6 { background: #fff8e3; color: #7d5a00; }
+
+    /* --- New Arrivals --- */
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+    .section-header h2 { font-size: 2.2rem; font-weight: 900; color: var(--green-900); }
+    #trending .products-grid { margin-bottom: 5rem; }
+
+    /* --- Designed for Students Section --- */
+    .features-section { background: linear-gradient(135deg, var(--green-950) 0%, var(--green-900) 100%); color: white; padding: 5rem 0; text-align: center; }
+    .features-section h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 4rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+    .feature-item { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    .feature-icon { width: 60px; height: 60px; background: rgba(255,255,255,0.12); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--yellow-400); }
+    .feature-item h3 { font-size: 1.4rem; font-weight: 800; }
+    .feature-item p { color: #cbd5e1; font-size: 1rem; max-width: 300px; line-height: 1.6; }
+
+    /* --- Post Your Item (Horizontal Form) --- */
+    .post-section { background: linear-gradient(135deg, #f7fbf5 0%, #fff9e8 100%); padding: 5rem 0; color: var(--gray-900); }
+    .post-container {
+      background: linear-gradient(to right, var(--green-900), #1b7041);
+      border-radius: 24px;
+      padding: 2.5rem;
+    }
+    .post-container h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--white); }
+    .post-container p { color: #d1d5db; margin-bottom: 2rem; font-weight: 600; }
+    
+    .horizontal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .input-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .horizontal-form input, .horizontal-form select, .horizontal-form textarea {
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--gray-900);
+    }
+    .horizontal-form textarea { width: 100%; min-height: 100px; }
+    .photo-upload {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .photo-upload label {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #ecfdf3;
+    }
+    .photo-upload input[type="file"] {
+      padding: 0.7rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.95);
+      color: var(--gray-900);
+      font-family: inherit;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+    .submit-listing-btn {
+      background: var(--yellow-500);
+      color: var(--green-950);
+      padding: 0.9rem 2.5rem;
+      border-radius: 99px;
+      border: none;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      box-shadow: 0 4px 15px rgba(245, 197, 68, 0.3);
+    }
+    .submit-listing-btn:hover { filter: brightness(0.95); }
+    .form-message {
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      min-height: 1.25rem;
+    }
+    .form-message.success { color: #dcfce7; }
+    .form-message.error { color: #fecaca; }
+
+    /* --- Safety Tips Section --- */
+    .safety-section { background: var(--green-950); padding: 2rem 0 5rem; }
+    .safety-card {
+      background: #133926;
+      border-radius: 16px;
+      padding: 2.5rem;
+      border-left: 5px solid var(--green-500);
+    }
+    .safety-card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem; color: white; }
+    .safety-list { list-style: none; color: #d1d5db; }
+    .safety-list li { margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; font-weight: 600; }
+    .safety-list li::before { content: "•"; color: var(--green-500); font-weight: bold; font-size: 1.8rem; line-height: 0; margin-top: 4px; }
+
+    .back-to-top {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--green-700);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 101;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Product Slider */
+    .slider-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .slider-wrapper .products-grid {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      gap: 1.5rem;
+      transition: transform 0.4s ease;
+    }
+    .slider-wrapper .product-card {
+      flex: 0 0 auto;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      cursor: pointer;
+      font-size: 1rem;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .slider-btn:hover {
+      background: #fff;
+    }
+    .slider-btn:disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .slider-prev {
+      left: 0.5rem;
+    }
+    .slider-next {
+      right: 0.5rem;
+    }
+    @media (max-width: 1024px) {
+      .products-grid, .categories-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero-card { min-height: 440px; }
+      .hero-content { padding: 3rem; max-width: 680px; }
+      .hero h1 { font-size: 2.25rem; white-space: normal; }
+      .hero-sub { white-space: normal; }
+    }
+    @media (max-width: 768px) {
+      .features-grid, .input-row { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-card { min-height: 420px; }
+      .hero h1 { font-size: 1.95rem; white-space: normal; }
+      .hero-sub { font-size: 0.9rem; white-space: normal; }
+      .search-category { display: none; }
+      .hero-content { padding: 2.1rem; max-width: 100%; }
+      .hero-trust { gap: 0.5rem; }
+      .hero-pill { font-size: 0.74rem; }
+    }
+    @media (max-width: 560px) {
+      .products-grid, .categories-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 1.5rem; }
+      .search-wrapper { flex-direction: column; gap: 0.65rem; border-radius: 16px; padding: 0.85rem; align-items: stretch; }
+      .search-input-group { padding-left: 0.5rem; }
+      .search-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <a href="homepage.html" class="logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-links" class="nav-links">
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="saved.html" class="nav-saved"><i class="fa-solid fa-heart" aria-hidden="true"></i><span class="nav-saved-text">Saved</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section with Search Bar -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-content">
+            <h1>Smart vibes. Better deals.</h1>
+            <p class="hero-sub">Your student hub to discover listings and connect with verified classmates on campus.</p>
+            
+            <div class="search-container">
+              <div class="search-wrapper" role="search" aria-label="Search listed items">
+                <div class="search-input-group">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <label for="search-input" class="sr-only">Search by product name</label>
+                  <input id="search-input" type="text" placeholder="What are you looking for?" autocomplete="off">
+                </div>
+                <div class="search-category">
+                  <label for="search-category" class="sr-only">Filter by category</label>
+                  <select id="search-category">
+                    <option>All Categories</option>
+                    <option>Textbooks</option>
+                    <option>Clothing</option>
+                    <option>Electronics</option>
+                    <option>Furniture</option>
+                    <option>Transport</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <button id="search-btn" class="search-btn" type="button">Search</button>
+              </div>
+              <p id="search-results-count" class="search-results-count" aria-live="polite"></p>
+            </div>
+            <div class="hero-trust">
+              <span class="hero-pill"><i class="fa-solid fa-shield-halved"></i> Verified Students</span>
+              <span class="hero-pill"><i class="fa-solid fa-location-dot"></i> Campus Pick-up</span>
+              <span class="hero-pill"><i class="fa-solid fa-bolt"></i> Fast Local Deals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="container">
+      <div class="categories-grid">
+        <a href="listings.html?category=Textbooks" class="cat-card cat-1" data-category-filter="Textbooks">
+          <div class="cat-icon"><i class="fa-solid fa-book-open"></i></div>
+          <span>Textbooks</span>
+        </a>
+          <a href="listings.html?category=Clothing" class="cat-card cat-2" data-category-filter="Clothing">
+          <div class="cat-icon"><i class="fa-solid fa-shirt"></i></div>
+          <span>Clothing</span>
+        </a>
+        <a href="listings.html?category=Electronics" class="cat-card cat-3" data-category-filter="Electronics">
+          <div class="cat-icon"><i class="fa-solid fa-laptop"></i></div>
+          <span>Electronics</span>
+        </a>
+        <a href="listings.html?category=Furniture" class="cat-card cat-4" data-category-filter="Furniture">
+          <div class="cat-icon"><i class="fa-solid fa-couch"></i></div>
+          <span>Furniture</span>
+        </a>
+        <a href="listings.html?category=Transport" class="cat-card cat-5" data-category-filter="Transport">
+          <div class="cat-icon"><i class="fa-solid fa-bicycle"></i></div>
+          <span>Transport</span>
+        </a>
+        <a href="listings.html" class="cat-card cat-6" data-category-filter="All Categories">
+          <div class="cat-icon"><i class="fa-solid fa-ellipsis"></i></div>
+          <span>More</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- New on Campus -->
+    <section id="trending" class="container">
+      <div class="section-header">
+        <div>
+          <h2>New on Campus</h2>
+          <p style="color: #666; font-weight: 600;">Latest items posted in the last 24 hours</p>
+        </div>
+        <a href="listings.html" style="color: var(--green-700); text-decoration: none; font-weight: 800;">View All <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" aria-label="Previous products" disabled><i class="fa-solid fa-chevron-left"></i></button>
+        <div id="products-grid" class="products-grid"></div>
+        <button class="slider-btn slider-next" aria-label="Next products"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+    <!-- Designed for Students -->
+    <section id="how-it-works" class="features-section">
+      <div class="container">
+        <h2>Designed for Students, by Students</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Safe On-Campus Meets</h3>
+            <p>To ensure safe and transparent deals, we recommend verified campus meeting areas.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-building-columns"></i></div>
+            <h3>Edu-Mail Verification</h3>
+            <p>Every student is verified with their official university email address to avoid scams.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
+            <h3>Sustainable Living</h3>
+            <p>Minimise waste and save money while keeping high-quality products in the student community.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Form Design -->
+    <section id="post" class="post-section">
+      <div class="container">
+        <div class="post-container">
+          <h2>Post Your Item</h2>
+          <p>Fill in your details and connect with students near you.</p>
+          
+          <form id="post-item-form" class="horizontal-form" enctype="multipart/form-data" novalidate>
+            <div class="input-row">
+              <label for="item-name" class="sr-only">Item Name</label>
+              <input id="item-name" type="text" placeholder="Item Name" required>
+              <label for="item-category" class="sr-only">Category</label>
+              <select id="item-category" required>
+                <option value="">Category</option>
+                <option>Textbooks</option>
+                <option>Clothing</option>
+                <option>Electronics</option>
+                <option>Furniture</option>
+                <option>Transport</option>
+                <option>Other</option>
+              </select>
+              <label for="item-price" class="sr-only">Price in AUD</label>
+              <input id="item-price" type="number" placeholder="Price (AUD)" min="1" required>
+              <label for="item-location" class="sr-only">Pickup Location</label>
+              <input id="item-location" type="text" placeholder="Pickup Location" required>
+            </div>
+            <label for="item-description" class="sr-only">Description</label>
+            <textarea id="item-description" placeholder="Description (condition, brand, size, etc.)" minlength="15" required></textarea>
+            <div class="photo-upload">
+              <label for="item-photo">Upload item photo</label>
+              <input id="item-photo" type="file" accept="image/*" required>
+            </div>
+            <button type="submit" class="submit-listing-btn">Submit Listing</button>
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety Tips -->
+    <section class="safety-section">
+      <div class="container">
+        <div class="safety-card">
+          <h3>Student Safety Tips</h3>
+          <ul class="safety-list">
+            <li>Meet in public locations such as the campus cafe.</li>
+            <li>Use online methods and keep transaction records.</li>
+            <li>Check electronics before purchasing.</li>
+            <li>Never share sensitive information such as bank accounts.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Updated Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="homepage.html" class="footer-logo"><i class="fa-solid fa-graduation-cap"></i> Stu<span>vibe</span></a>
+          <p>Making student living smarter, greener and more enjoyable with chill vibes</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="safety-tips.html">Safety Tips</a></li>
+            <li><a href="community-rules.html">Community Rules</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; <span id="copyright-year">2026</span> Stuvibe. Smart vibes, smarter savings for students.
+    </div>
+  </footer>
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+  <script>
+(function (global) {
+  var CUSTOM_KEY = "stuvibe-custom-listings";
+
+  var CATALOG = {
+    "Artificial Intelligence": {
+      category: "Textbooks",
+      breadcrumb: "textbooks",
+      price: 50,
+      priceDisplay: "$50",
+      image: "textbook.jpeg",
+      condition: "Like new",
+      location: "CQU Melbourne",
+      seller: "Richard",
+      rating: 3,
+      description: "Artificial Intelligence textbook used for one semester. No missing pages, minimal highlighting."
+    },
+    "HP 2024": {
+      category: "Electronics",
+      breadcrumb: "laptops",
+      price: 300,
+      priceDisplay: "$300",
+      image: "electronichp.png",
+      condition: "Excellent",
+      location: "RMIT Swanston",
+      seller: "Richard",
+      rating: 3,
+      description: "HP laptop 2024 model. Battery health good, includes charger. Perfect for study and assignments."
+    },
+    "Desk Chair": {
+      category: "Furniture",
+      breadcrumb: "indoor",
+      price: 30,
+      priceDisplay: "$30",
+      image: "furniture.jpeg",
+      condition: "Good",
+      location: "Near Flinders Station",
+      seller: "Richard",
+      rating: 3,
+      description: "Comfortable desk chair in good condition. Ideal for dorm or shared housing. Pick up near campus."
+    },
+    "Winter Jacket": {
+      category: "Clothing",
+      breadcrumb: "outerwear",
+      price: 70,
+      priceDisplay: "$70",
+      image: "clothing.png",
+      condition: "Very good",
+      location: "ACU Sydney",
+      seller: "Richard",
+      rating: 3,
+      description: "Warm winter jacket, size M. Worn a few times, clean and ready for the next owner."
+    },
+    "Bike": {
+      category: "Transport",
+      breadcrumb: "bike",
+      price: 120,
+      priceDisplay: "$120",
+      image: "transport.webp",
+      condition: "Good",
+      location: "Melbourne Uni",
+      seller: "Richard",
+      rating: 3,
+      description: "Student bike in good condition. Perfect for getting around campus and nearby areas. Helmet included."
+    }
+  };
+
+  function getCustomListings() {
+    try {
+      return JSON.parse(localStorage.getItem(CUSTOM_KEY) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCustomListings(list) {
+    localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
+  }
+
+  function normalizeProduct(name, data) {
+    var product = Object.assign({}, data);
+    product.name = name;
+    if (typeof product.price === "number" && !product.priceDisplay) {
+      product.priceDisplay = "$" + product.price;
+    }
+    if (!product.price && product.priceDisplay) {
+      product.price = parsePrice(product);
+    }
+    return product;
+  }
+
+  function getAllProducts() {
+    var merged = {};
+    Object.keys(CATALOG).forEach(function (name) {
+      merged[name] = normalizeProduct(name, CATALOG[name]);
+    });
+    getCustomListings().forEach(function (item) {
+      if (item && item.name) {
+        merged[item.name] = normalizeProduct(item.name, item);
+      }
+    });
+    return merged;
+  }
+
+  function getProduct(name) {
+    return getAllProducts()[name] || null;
+  }
+
+  function getProductNames() {
+    return Object.keys(getAllProducts());
+  }
+
+  function parsePrice(product) {
+    if (typeof product.price === "number") {
+      return product.price;
+    }
+    return parseFloat(String(product.priceDisplay || product.price || "0").replace(/[^0-9.]/g, "")) || 0;
+  }
+
+  function addProduct(product) {
+    var custom = getCustomListings();
+    var entry = normalizeProduct(product.name, product);
+    custom = custom.filter(function (item) {
+      return item.name !== entry.name;
+    });
+    custom.unshift(entry);
+    saveCustomListings(custom);
+    return entry;
+  }
+
+  global.StuvibeProducts = {
+    CATALOG: CATALOG,
+    getAllProducts: getAllProducts,
+    getProduct: getProduct,
+    getProductNames: getProductNames,
+    parsePrice: parsePrice,
+    addProduct: addProduct,
+    getCustomListings: getCustomListings
+  };
+})(window);
+
+(function (global) {
+  var FAV_KEY = "stuvibe-favourites";
+
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function getFavourites() {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
+    } catch (e) {
+      return new Set();
+    }
+  }
+
+  function saveFavourites(set) {
+    localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(set)));
+  }
+
+  function renderProductCard(name, product, options) {
+    options = options || {};
+    var tagClass = options.tagClass || "tag";
+    var price = product.priceDisplay || ("$" + product.price);
+    var detailUrl = "product-detail.html?item=" + encodeURIComponent(name);
+    var alt = escapeHtml(product.alt || name);
+
+    return (
+      '<article class="product-card" data-category="' + escapeHtml(product.category) + '" data-name="' + escapeHtml(name) + '" data-price="' + global.StuvibeProducts.parsePrice(product) + '">' +
+        '<div class="img-wrap">' +
+          '<span class="' + tagClass + '">' + escapeHtml(product.category) + "</span>" +
+          '<button class="heart" type="button" aria-label="Add ' + escapeHtml(name) + ' to favourites"><i class="fa-solid fa-heart"></i></button>' +
+          '<img src="' + escapeHtml(product.image) + '" alt="' + alt + '" loading="lazy">' +
+        "</div>" +
+        '<div class="p-info">' +
+          "<h3>" + escapeHtml(name) + "</h3>" +
+          '<div class="p-loc"><i class="fa-solid fa-location-dot"></i> ' + escapeHtml(product.location) + "</div>" +
+          '<div class="p-foot">' +
+            '<span class="p-price">' + escapeHtml(price) + "</span>" +
+            '<a href="' + detailUrl + '" class="p-detail">View detail</a>' +
+          "</div>" +
+        "</div>" +
+      "</article>"
+    );
+  }
+
+  function applyFavouriteState(root) {
+    var favourites = getFavourites();
+    (root || document).querySelectorAll(".product-card").forEach(function (card) {
+      var button = card.querySelector(".heart");
+      if (!button) {
+        return;
+      }
+      var productName = card.getAttribute("data-name") || "";
+      var isFavourite = favourites.has(productName);
+      button.classList.toggle("is-favorite", isFavourite);
+      button.setAttribute(
+        "aria-label",
+        (isFavourite ? "Remove " : "Add ") + productName + (isFavourite ? " from favourites" : " to favourites")
+      );
+    });
+  }
+
+  function initFavourites(root) {
+    var container = root || document;
+    container.addEventListener("click", function (event) {
+      var button = event.target.closest(".heart");
+      if (!button) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      var card = button.closest(".product-card");
+      if (!card) {
+        return;
+      }
+      var productName = card.getAttribute("data-name") || "";
+      var favourites = getFavourites();
+      if (favourites.has(productName)) {
+        favourites.delete(productName);
+      } else {
+        favourites.add(productName);
+      }
+      saveFavourites(favourites);
+      applyFavouriteState(container);
+    });
+    applyFavouriteState(container);
+  }
+
+  function renderProductGrid(gridEl, names, options) {
+    if (!gridEl) {
+      return [];
+    }
+    var products = global.StuvibeProducts.getAllProducts();
+    var html = names
+      .map(function (name) {
+        return products[name] ? renderProductCard(name, products[name], options) : "";
+      })
+      .join("");
+    gridEl.innerHTML = html;
+    applyFavouriteState(gridEl);
+    return Array.from(gridEl.querySelectorAll(".product-card"));
+  }
+
+  global.StuvibeProductUI = {
+    escapeHtml: escapeHtml,
+    renderProductCard: renderProductCard,
+    renderProductGrid: renderProductGrid,
+    initFavourites: initFavourites,
+    applyFavouriteState: applyFavouriteState,
+    getFavourites: getFavourites
+  };
+})(window);
+
+(function (global) {
+  function getFocusable(container) {
+    return Array.from(
+      container.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter(function (el) {
+      return el.offsetParent !== null;
+    });
+  }
+
+  function setupModal(modalEl) {
+    if (!modalEl) {
+      return { open: function () {}, close: function () {} };
+    }
+
+    var dialog = modalEl.querySelector(".offer-dialog");
+    var lastFocus = null;
+
+    function open() {
+      lastFocus = document.activeElement;
+      modalEl.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      var focusable = getFocusable(dialog || modalEl);
+      if (focusable.length) {
+        focusable[0].focus();
+      }
+    }
+
+    function close() {
+      modalEl.classList.remove("is-open");
+      document.body.style.overflow = "";
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    }
+
+    modalEl.addEventListener("click", function (event) {
+      if (event.target === modalEl) {
+        close();
+      }
+    });
+
+    modalEl.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab" || !modalEl.classList.contains("is-open")) {
+        return;
+      }
+      var focusable = getFocusable(dialog || modalEl);
+      if (!focusable.length) {
+        return;
+      }
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    return { open: open, close: close };
+  }
+
+  global.StuvibeModals = { setupModal: setupModal };
+})(window);
+
+(function (global) {
+  function listingsUrl(query, category) {
+    var params = new URLSearchParams();
+    if (query) {
+      params.set("q", query);
+    }
+    if (category && category !== "all" && category !== "All Categories") {
+      params.set("category", category);
+    }
+    var qs = params.toString();
+    return "listings.html" + (qs ? "?" + qs : "");
+  }
+
+  function initHeroSearch(formSelector) {
+    var searchInput = document.getElementById("search-input");
+    var searchCategory = document.getElementById("search-category");
+    var searchButton = document.getElementById("search-btn");
+    if (!searchInput || !searchCategory) {
+      return;
+    }
+
+    function goToListings() {
+      window.location.href = listingsUrl(searchInput.value.trim(), searchCategory.value);
+    }
+
+    if (searchButton) {
+      searchButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        goToListings();
+      });
+    }
+
+    var wrapper = document.querySelector(formSelector || ".search-wrapper");
+    if (wrapper) {
+      wrapper.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          goToListings();
+        }
+      });
+    }
+  }
+
+  global.StuvibeSearch = {
+    listingsUrl: listingsUrl,
+    initHeroSearch: initHeroSearch
+  };
+
+})(window);
+
+function initSiteNav() {
+var navToggle = document.getElementById("nav-toggle");
+  var navLinks = document.getElementById("nav-links");
+  if (!navToggle || !navLinks) {
+    return;
+  }
+
+  navToggle.addEventListener("click", function () {
+    var isOpen = navLinks.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  });
+
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    });
+  });
+}
+
+function initSiteCommon() {
+  initSiteNav();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initSiteCommon();
+
+      StuvibeSearch.initHeroSearch(".search-wrapper");
+      var searchCategory = document.getElementById("search-category");
+      var categoryCards = Array.from(document.querySelectorAll("[data-category-filter]"));
+      categoryCards.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          var cat = link.dataset.categoryFilter || "All Categories";
+          if (cat === "All Categories") {
+            window.location.href = "listings.html";
+          } else {
+            window.location.href = "listings.html?category=" + encodeURIComponent(cat);
+          }
+        });
+      });
+      var backToTopButton = document.getElementById("back-to-top");
+      window.addEventListener("scroll", function () {
+        backToTopButton.classList.toggle("visible", window.scrollY > 500);
+      });
+      backToTopButton.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener("click", function (event) {
+          var targetId = anchor.getAttribute("href");
+          if (!targetId || targetId === "#") return;
+          var target = document.querySelector(targetId);
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+      var copyrightYear = document.getElementById("copyright-year");
+      if (copyrightYear) {
+        copyrightYear.textContent = String(new Date().getFullYear());
+      }
+
+  var productsGrid = document.getElementById("products-grid");
+  var postItemForm = document.getElementById("post-item-form");
+  var formMessage = document.getElementById("form-message");
+  var searchInput = document.getElementById("search-input");
+  var searchCategory = document.getElementById("search-category");
+  var resultsCount = document.getElementById("search-results-count");
+
+  function renderHomeProducts() {
+    if (!productsGrid) {
+      return;
+    }
+    var customFirst = StuvibeProducts.getCustomListings().map(function (p) {
+      return p.name;
+    });
+    var names = StuvibeProducts.getProductNames();
+    var ordered = customFirst.concat(
+      names.filter(function (n) {
+        return customFirst.indexOf(n) === -1;
+      })
+    );
+    StuvibeProductUI.renderProductGrid(productsGrid, ordered);
+    StuvibeProductUI.initFavourites(productsGrid);
+    if (searchInput && searchCategory) {
+      runLocalFilter();
+    }
+  }
+
+  function initSlider() {
+    var wrapper = document.querySelector('.slider-wrapper');
+    if (!wrapper || !productsGrid) {
+      return;
+    }
+    var prevBtn = wrapper.querySelector('.slider-prev');
+    var nextBtn = wrapper.querySelector('.slider-next');
+    var cards = productsGrid.querySelectorAll('.product-card');
+    prevBtn.style.display = '';
+    nextBtn.style.display = '';
+    var total = cards.length;
+    if (total <= 4) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      productsGrid.style.transform = 'translateX(0)';
+      return;
+    }
+    var gap = 24;
+    var currentSlide = 0;
+    if (window._sliderState) {
+      currentSlide = window._sliderState.currentSlide;
+      if (window._sliderState.resizeHandler) {
+        window.removeEventListener('resize', window._sliderState.resizeHandler);
+      }
+    }
+    function getItemsPerSlide() {
+      var w = window.innerWidth;
+      if (w <= 560) { return 1; }
+      if (w <= 768) { return 2; }
+      if (w <= 1024) { return 3; }
+      return 4;
+    }
+    function layout() {
+      var itemsPerSlide = getItemsPerSlide();
+      var wrapperWidth = wrapper.offsetWidth;
+      var cardWidth = (wrapperWidth - (itemsPerSlide - 1) * gap) / itemsPerSlide;
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].style.flex = '0 0 ' + cardWidth + 'px';
+      }
+      var maxSlide = Math.ceil(total / itemsPerSlide) - 1;
+      if (currentSlide > maxSlide) {
+        currentSlide = maxSlide;
+      }
+      productsGrid.style.transform = 'translateX(-' + (currentSlide * wrapperWidth) + 'px)';
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide >= maxSlide;
+    }
+    prevBtn.onclick = function () {
+      if (currentSlide > 0) {
+        currentSlide--;
+        productsGrid.style.transform = 'translateX(-' + (currentSlide * wrapper.offsetWidth) + 'px)';
+        nextBtn.disabled = false;
+        prevBtn.disabled = currentSlide === 0;
+      }
+    };
+    nextBtn.onclick = function () {
+      var itemsPerSlide = getItemsPerSlide();
+      var maxSlide = Math.ceil(total / itemsPerSlide) - 1;
+      if (currentSlide < maxSlide) {
+        currentSlide++;
+        productsGrid.style.transform = 'translateX(-' + (currentSlide * wrapper.offsetWidth) + 'px)';
+        prevBtn.disabled = false;
+        nextBtn.disabled = currentSlide >= maxSlide;
+      }
+    };
+    function resizeHandler() {
+      layout();
+    }
+    window.addEventListener('resize', resizeHandler);
+    window._sliderState = {
+      currentSlide: currentSlide,
+      resizeHandler: resizeHandler
+    };
+    layout();
+  }
+
+  function normalize(text) {
+    return text.trim().toLowerCase();
+  }
+
+  function runLocalFilter() {
+    var query = normalize(searchInput.value);
+    var selectedCategory = searchCategory.value;
+    var visibleItems = 0;
+    productsGrid.querySelectorAll(".product-card").forEach(function (card) {
+      var itemName = normalize(card.getAttribute("data-name") || "");
+      var itemCategory = card.getAttribute("data-category") || "";
+      var matchesName = !query || itemName.includes(query);
+      var matchesCategory = selectedCategory === "All Categories" || selectedCategory === itemCategory;
+      var shouldShow = matchesName && matchesCategory;
+      card.classList.toggle("is-hidden", !shouldShow);
+      if (shouldShow) {
+        visibleItems += 1;
+      }
+    });
+    var sliderWrapper = document.querySelector('.slider-wrapper');
+    if (sliderWrapper) {
+      var prevBtn = sliderWrapper.querySelector('.slider-prev');
+      var nextBtn = sliderWrapper.querySelector('.slider-next');
+      var allCards = productsGrid.querySelectorAll('.product-card').length;
+      if (visibleItems < allCards) {
+        productsGrid.style.transform = 'translateX(0)';
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = '';
+        nextBtn.style.display = '';
+        initSlider();
+      }
+    }
+    if (resultsCount) {
+      resultsCount.textContent =
+        visibleItems === 1
+          ? "1 item matched your search."
+          : visibleItems + " items matched your search.";
+    }
+  }
+
+  if (searchInput && searchCategory) {
+    searchInput.addEventListener("input", runLocalFilter);
+    searchCategory.addEventListener("change", runLocalFilter);
+  }
+
+  if (postItemForm) {
+    postItemForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      formMessage.className = "form-message";
+
+      if (!postItemForm.checkValidity()) {
+        formMessage.textContent = "Please complete all required fields before submitting.";
+        formMessage.classList.add("error");
+        postItemForm.reportValidity();
+        return;
+      }
+
+      var itemName = document.getElementById("item-name").value.trim();
+      var itemCategory = document.getElementById("item-category").value;
+      var itemPrice = Number(document.getElementById("item-price").value);
+      var itemLocation = document.getElementById("item-location").value.trim();
+      var itemDescription = document.getElementById("item-description").value.trim();
+      var fileInput = document.getElementById("item-photo");
+      var photoFile = fileInput.files[0];
+      var imageSource = photoFile ? URL.createObjectURL(photoFile) : "banner1.png";
+
+      StuvibeProducts.addProduct({
+        name: itemName,
+        category: itemCategory,
+        breadcrumb: itemCategory.toLowerCase(),
+        price: itemPrice,
+        priceDisplay: "$" + itemPrice,
+        image: imageSource,
+        location: itemLocation,
+        condition: "Good",
+        seller: "You",
+        rating: 0,
+        description: itemDescription
+      });
+
+      renderHomeProducts();
+      initSlider();
+      formMessage.textContent = "Listing submitted successfully. It now appears on the homepage and Browse page.";
+      formMessage.classList.add("success");
+      postItemForm.reset();
+      document.getElementById("trending").scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  renderHomeProducts();
+  initSlider();
+
+});
+  </script>
+</body>
+</html>
